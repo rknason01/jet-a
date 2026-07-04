@@ -44,7 +44,9 @@
     .unit-badge { background: #191d27; border-left: 1px solid var(--border); padding: 0 1rem; display: flex; align-items: center; font-family: var(--mono); font-size: 1rem; color: var(--muted); letter-spacing: 0.1em; white-space: nowrap; }
     .field-group { display: flex; flex-direction: column; margin-bottom: 1.75rem; }
     .field-group .field-label { margin-bottom: 0.5rem; }
-    .result-box { border-radius: 3px; padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; border: 1px solid var(--border); background: #0d0f14; }
+    .result-box { border-radius: 3px; padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; border: 1px solid var(--border); background: #0d0f14; cursor: grab; touch-action: none; }
+    .result-box.sortable-ghost { opacity: 0.3; }
+    .result-box.sortable-chosen { border-color: var(--accent); }
     .result-box.negative { border-color: var(--red); background: #1e0d0d; }
     .result-box.green { border-color: var(--green); background: #0b1e16; }
     .result-box .box-label { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
@@ -120,27 +122,29 @@
 
     <hr class="divider" />
 
-    <div class="result-box green">
-      <div class="box-label">Uplift in Liters</div>
-      <div class="box-row">
-        <div class="box-val" id="upliftLiters">--</div>
-        <div class="box-unit">LTRS</div>
+    <div id="resultContainer">
+      <div class="result-box green">
+        <div class="box-label">Uplift in Liters</div>
+        <div class="box-row">
+          <div class="box-val" id="upliftLiters">--</div>
+          <div class="box-unit">LTRS</div>
+        </div>
       </div>
-    </div>
 
-    <div class="result-box" id="lbsBox">
-      <div class="box-label" id="lbsLabel">Uplift in Pounds</div>
-      <div class="box-row">
-        <div class="box-val" id="addLbs">--</div>
-        <div class="box-unit">LBS</div>
+      <div class="result-box" id="lbsBox">
+        <div class="box-label" id="lbsLabel">Uplift in Pounds</div>
+        <div class="box-row">
+          <div class="box-val" id="addLbs">--</div>
+          <div class="box-unit">LBS</div>
+        </div>
       </div>
-    </div>
 
-    <div class="result-box" style="margin-bottom:0;">
-      <div class="box-label">Uplift in US Gallons</div>
-      <div class="box-row">
-        <div class="box-val" id="upliftGallons">--</div>
-        <div class="box-unit">US GALS</div>
+      <div class="result-box" style="margin-bottom:0;">
+        <div class="box-label">Uplift in US Gallons</div>
+        <div class="box-row">
+          <div class="box-val" id="upliftGallons">--</div>
+          <div class="box-unit">US GALS</div>
+        </div>
       </div>
     </div>
   </div>
@@ -150,6 +154,7 @@
     Results are approximate -- verify with flight manual data.
   </p>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
   <script>
     var FUELS = {
       jeta:  [0.818, 0.800, 0.778],
@@ -227,6 +232,13 @@
         gallons.textContent = delta === 0 ? '0' : '--';
       }
     }
+    Sortable.create(document.getElementById('resultContainer'), {
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      chosenClass: 'sortable-chosen',
+      delay: 100,
+      delayOnTouchOnly: true
+    });
   </script>
 </body>
 </html>
