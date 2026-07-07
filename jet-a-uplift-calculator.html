@@ -28,23 +28,23 @@
     .eyebrow { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.35rem; }
     h1 { font-family: var(--sans); font-weight: 600; font-size: 1.6rem; color: #c8d0e0; margin-bottom: 0.25rem; }
     .subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; }
-    .field-label { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.5rem; }
+    .field-label { font-size: 1.15rem; font-weight: 600; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.5rem; }
     .selector-section { margin-bottom: 1.75rem; }
     .type-row, .sg-row { display: flex; gap: 0.5rem; }
     .type-row { margin-bottom: 0.75rem; }
-    .sg-row { margin-bottom: 0; flex-direction: column; }
+    .sg-row { margin-bottom: 0; }
     .type-btn { flex: 1; background: #0d0f14; border: 1px solid var(--border); border-radius: 3px; padding: 0.75rem 0.5rem; cursor: pointer; text-align: center; font-family: var(--mono); color: var(--muted); font-size: 1.1rem; font-weight: 600; letter-spacing: 0.06em; }
     .type-btn.active { border-color: var(--accent); background: #1c1608; color: var(--accent); }
-    .sg-btn { width: 100%; background: #0d0f14; border: 1px solid var(--border); border-radius: 3px; padding: 0.65rem 0.1rem 0.65rem 0.1rem; cursor: pointer; font-family: var(--mono); color: var(--muted); display: flex; align-items: center; justify-content: space-between; white-space: nowrap; overflow: hidden; }
+    .sg-btn { flex: 1; background: #0d0f14; border: 1px solid var(--border); border-radius: 3px; padding: 0.65rem 0.4rem; cursor: pointer; text-align: center; font-family: var(--mono); color: var(--muted); font-size: 1rem; line-height: 1.5; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .sg-btn.active { border-color: var(--accent); background: #1c1608; color: var(--accent); }
     .sg-btn.sortable-ghost { opacity: 0.3; }
     .sg-btn.sortable-chosen { border-color: var(--accent); }
     .sg-btn .sg-left { min-width: 75px; width: 75px; }
     .sg-btn .sg-right { display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; flex: 1; justify-content: space-between; }
     .sg-btn .sg-temp { flex: 1; text-align: left; }
-    .sg-btn .sg-label { font-size: 1.2rem; font-weight: 600; width: 75px; display: block; }
-    .sg-btn .sg-temp { font-size: 1.2rem; font-weight: 600; flex: 1; text-align: left; }
-    .sg-btn .sg-val { font-size: 1.2rem; padding-right: 0.9rem; }
+    .sg-btn .sg-label { font-size: 1.2rem; font-weight: 600; text-align: center; }
+    .sg-btn .sg-temp { font-size: 1.2rem; font-weight: 600; text-align: center; }
+    .sg-btn .sg-val { font-size: 1.2rem; text-align: center; }
     .divider { border: none; border-top: 1px solid #4a5a6a; margin: 1.75rem 0; }
     .input-row { display: flex; align-items: stretch; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; transition: border-color 0.15s; }
     .input-row.over-limit { border-color: var(--red); background: #1e0d0d; }
@@ -93,32 +93,26 @@
 
       <div class="field-label">Fuel Temperature</div>
       <div class="sg-row" id="sgContainer">
-        <button class="sg-btn active" id="sgStd" onclick="setSg(1)">
-          <div class="sg-left">
-            <div class="sg-label">Std&nbsp;</div>
-          </div>
-          <div class="sg-right">
-            <div class="sg-temp">15C (59F)</div>
-            <div class="sg-val" id="sgStdVal">SG 0.800</div>
-          </div>
-        </button>
         <button class="sg-btn" id="sgCold" onclick="setSg(0)">
-          <div class="sg-left">
-            <div class="sg-label">Cold</div>
-          </div>
-          <div class="sg-right">
-            <div class="sg-temp">< 0C (32F)</div>
-            <div class="sg-val" id="sgColdVal">SG 0.818</div>
-          </div>
+          <div class="sg-label">Cold</div>
+          <hr style="border:none;border-top:1px solid #4a5568;width:80%;margin:0.3rem auto;">
+          <div class="sg-temp">&lt; 0C (32F)</div>
+          <hr style="border:none;border-top:1px solid #4a5568;width:80%;margin:0.3rem auto;">
+          <div class="sg-val" id="sgColdVal">SG 0.818</div>
+        </button>
+        <button class="sg-btn active" id="sgStd" onclick="setSg(1)">
+          <div class="sg-label">Std</div>
+          <hr style="border:none;border-top:1px solid #4a5568;width:80%;margin:0.3rem auto;">
+          <div class="sg-temp">15C (59F)</div>
+          <hr style="border:none;border-top:1px solid #4a5568;width:80%;margin:0.3rem auto;">
+          <div class="sg-val" id="sgStdVal">SG 0.800</div>
         </button>
         <button class="sg-btn" id="sgHot" onclick="setSg(2)">
-          <div class="sg-left">
-            <div class="sg-label" style="margin-left:-2px;">Hot</div>
-          </div>
-          <div class="sg-right">
-            <div class="sg-temp">> 30C (86F)</div>
-            <div class="sg-val" id="sgHotVal">SG 0.778</div>
-          </div>
+          <div class="sg-label">Hot</div>
+          <hr style="border:none;border-top:1px solid #4a5568;width:80%;margin:0.3rem auto;">
+          <div class="sg-temp">&gt; 30C (86F)</div>
+          <hr style="border:none;border-top:1px solid #4a5568;width:80%;margin:0.3rem auto;">
+          <div class="sg-val" id="sgHotVal">SG 0.778</div>
         </button>
       </div>
     </div>
@@ -172,9 +166,7 @@
     </div>
   </div>
 
-  <p class="note">
-    Liters = (Pounds x 0.454) ÷ SG
-  </p>
+  <p class="note" style="text-align:center;"><span style="display:inline-block;text-align:left;"><span style="display:block;font-size:1rem;font-weight:600;letter-spacing:0.05em;color:var(--muted);">FORMULA</span><span style="display:block;">Liters = (Pounds x 0.454) ÷ SG</span></span></p>
 
   <button onclick="clearValues()" style="display:block;margin:1.25rem auto 0;background:#0d0f14;border:1px solid #2e3a4a;color:var(--muted);font-family:var(--mono);font-size:1.2rem;font-weight:700;letter-spacing:0.08em;padding:0.75rem 2rem;border-radius:16px;cursor:pointer;width:100%;max-width:420px;">RESET</button>
 
@@ -316,15 +308,6 @@
       document.getElementById('upliftLiters').textContent = '--';
       document.getElementById('upliftGallons').textContent = '--';
     }
-
-    Sortable.create(document.getElementById('sgContainer'), {
-      animation: 150,
-      ghostClass: 'sortable-ghost',
-      chosenClass: 'sortable-chosen',
-      delay: 400,
-      delayOnTouchOnly: true,
-      touchStartThreshold: 5
-    });
 
     Sortable.create(document.getElementById('resultContainer'), {
       animation: 150,
